@@ -1,0 +1,7 @@
+30:00  -  33:99 axios learn again
+
+
+New Additions - News App
+- Page size - 25 50 100 (No of results) {Drop-Down}
+- Optimize code
+- Prevent excessive api requests 

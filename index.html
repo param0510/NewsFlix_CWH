@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NewsFlix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+    <!-- External css file does not work -->
+    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <style>
+        /* .card img{ */
+        .card{
+            transition: all 0.5s;
+        }
+
+        .card:hover{
+            /* .card img{ */
+            transform: scale(1.07);
+            z-index: 2;
+            /* } */
+        }
+    </style>
+</head>
+
+<body style="background: linear-gradient(to bottom right, #d51c3c, #710d719c, #30938aba);">
+    <!-- Navbar -->
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/?q=all&pageNo=1">NewsFlix</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/?q=World+News&pageNo=1">World</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/?q=Sports&pageNo=1">Sports</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Polictics
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Use location to identify national politics -->
+                            <li><a class="dropdown-item" href="#">National</a></li>
+                            <li><a class="dropdown-item" href="/?q=International+Politics&pageNo=1">International</a></li>
+                            <!-- <li>
+                                <hr class="dropdown-divider">
+                            </li> -->
+                            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+                <form id="searchBarForm" class="d-flex" role="search" >
+                    <input id="searchInput" class="form-control me-2 text-muted" type="search" placeholder="Search" aria-label="Search">
+                    <input id="searchPageNo" type="text" value="1" hidden>
+                    <button class="btn btn-outline-info" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Heading -->
+    <h1 class="m-3 font-monospace" style="text-shadow: 1px 1px 2px #cbcbcb;">NewsFlix <span id="topic"></span></h1>
+
+    <!-- Cards -->
+    <div class="container py-3" style="min-height: 70vh; margin-top: 9px;" >
+
+        <div id="content" class="row justify-content-center">
+            <!-- Loading card view -->
+            <div class="card text-bg-dark border-info" aria-hidden="true" style="width: 18rem;">
+                <img src="https://media.istockphoto.com/id/1214916091/vector/news-icons-set-classic-line-series.jpg?s=612x612&w=0&k=20&c=7jGwOIwIwZ6fB2kH6IK7-53iVJebgolpFruSFCqKg5M=" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title placeholder-glow">
+                        <span class="placeholder col-6"></span>
+                    </h5>
+                    <p class="card-text placeholder-glow">
+                        <span class="placeholder col-7"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-6"></span>
+                        <span class="placeholder col-8"></span>
+                    </p>
+                    <a class="btn btn-primary disabled placeholder col-6"></a>
+                </div>
+            </div>
+            <!-- <div class="card text-bg-secondary" style="width: 18rem;"> -->
+            <!-- <div class="card text-bg-info border-dark" style="width: 18rem;"> -->
+            <!-- <div class="card text-bg-dark border-info" style="width: 18rem;">
+                <img src="" class="card-img-top" alt="..." style="border-bottom: 1px solid white;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                        content.</p>
+                    <a href="#" class="btn btn-success">Go somewhere</a>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+
+    <!-- Page Bar -->
+    <div class="pageBar container d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a id="prev" class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a hidden id="prevPageBatch" class="page-link" href="#">...</a></li>
+                <li class="page-item"><a id="pageNoLink1" class="page-link" href="#">1</a></li>
+                <li class="page-item"><a id="pageNoLink2" class="page-link" href="#">2</a></li>
+                <li class="page-item"><a id="pageNoLink3" class="page-link" href="#">3</a></li>
+                <li class="page-item"><a id="nextPageBatch" class="page-link" href="#">...</a></li>
+                <li class="page-item"><a id="next" class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <script defer> 
+        const placeholderImage = 'https://media.istockphoto.com/id/1214916091/vector/news-icons-set-classic-line-series.jpg?s=612x612&w=0&k=20&c=7jGwOIwIwZ6fB2kH6IK7-53iVJebgolpFruSFCqKg5M='
+        const newsLoader = (query, pageNo) =>
+        {
+            topic.textContent = `- ${query}`
+            var str = ``;
+            const url = '/data?'
+            const params = `q=${query}&page=${pageNo}` 
+            const apiRequestUri = url + params
+
+            // # Improvement: Prevent so many api requests !!...
+            fetch(apiRequestUri)
+            // fetch('https://newsapi.org/v2/everything?q=Apple&apiKey=f470b9130ae94c28b1e50b615112934f&pageSize=5')
+                .then(response => {
+                    return response.json()
+                })
+                .then((data) => {
+                    const articles = data.articles
+                    // articles = response.json()
+                    // articles.map((article) => {
+                    //     console.log(article)
+                    // })
+                    // console.log(response.json())
+                    // const newsApiResponse = resp
+                    // console.log(newsApiResponse.articles)
+                    articles.forEach(article => 
+                    {
+                        str += `<div class="card text-bg-dark border-info border m-2" style="width: 18rem; ">
+                                    <img src="${(article.urlToImage === null)? placeholderImage: article.urlToImage}" class="card-img-top" alt="..." style="border-bottom: 1px solid white; margin-top: 9px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-weight: bold; text-shadow: -1px 1px 3px #3800ff;">${article.title}</h5>
+                                        <p class="card-text">${article.description}</p>
+                                        <a target="_blank" href="${article.url}" class="btn btn-success">Read more...</a>
+                                    </div>
+                                </div>`
+                        // console.log(article)
+                    });
+                    // console.log(str)
+                    content.innerHTML = str
+                })
+                .catch(err => {err})
+            // var newsApiResponse = await fetch('/data?q=India')
+            // console.log(newsApiResponse)
+        }
+        // topic.textContent = 'Apple'
+        const urlParams = new URLSearchParams(window.location.search)
+        const query = urlParams.get('q')
+        const pageNo = urlParams.get('pageNo')
+        // console.log(pageNo)
+        newsLoader(query, pageNo)
+        // console.log(urlParams)
+
+        // searchBarForm.onsubmit = (e) => {
+        //         //e.preventDefault();
+        //         alert(`The form was submitted`);
+        //     }
+
+
+        searchBarForm.onsubmit = 
+            (e) => {
+                e.preventDefault();
+                const searchQuery = searchInput.value
+                const pageNo = searchPageNo.value
+                window.location.href = `/?q=${searchQuery}&pageNo=${pageNo}`
+            }
+
+        prev.href = `/?q=${query}&pageNo=${parseInt(pageNo) - 1}`
+        next.href = `/?q=${query}&pageNo=${parseInt(pageNo) + 1}`
+            
+        pageNoLink1.href=`/?q=${query}&pageNo=${pageNoLink1.textContent}` 
+        pageNoLink2.href=`/?q=${query}&pageNo=${pageNoLink2.textContent}` 
+        pageNoLink3.href=`/?q=${query}&pageNo=${pageNoLink3.textContent}` 
+
+        
+        nextPageBatch.onclick = e => {
+            e.preventDefault()
+            pageNoLink1.textContent = parseInt(pageNoLink1.textContent) + 3
+            pageNoLink2.textContent = parseInt(pageNoLink2.textContent) + 3
+            pageNoLink3.textContent = parseInt(pageNoLink3.textContent) + 3
+
+            pageNoLink1.href = `/?q=${query}&pageNo=${pageNoLink1.textContent}`
+            pageNoLink2.href = `/?q=${query}&pageNo=${pageNoLink2.textContent}`
+            pageNoLink3.href = `/?q=${query}&pageNo=${pageNoLink3.textContent}` 
+            
+            prevPageBatch.hidden = false
+        }
+
+        prevPageBatch.onclick = e => {
+            e.preventDefault()
+            if(parseInt(pageNoLink1.textContent) === 1)
+            {
+                return
+            }
+            else if(parseInt(pageNoLink1.textContent) === 4)
+            {
+                prevPageBatch.hidden = true
+            }
+
+            pageNoLink1.textContent = parseInt(pageNoLink1.textContent) - 3
+            pageNoLink2.textContent = parseInt(pageNoLink2.textContent) - 3
+            pageNoLink3.textContent = parseInt(pageNoLink3.textContent) - 3
+
+            pageNoLink1.href = `/?q=${query}&pageNo=${pageNoLink1.textContent}`
+            pageNoLink2.href = `/?q=${query}&pageNo=${pageNoLink2.textContent}`
+            pageNoLink3.href = `/?q=${query}&pageNo=${pageNoLink3.textContent}` 
+
+        }
+
+        if (pageNo != null && parseInt(pageNo) > 3) {
+            // Improve parseInt by making it global at intialization
+            prevPageBatch.hidden = false
+            pageNoValue = parseInt(pageNo)
+            if (pageNoValue % 3 == 0){
+                pageNoLink3.textContent = pageNoValue
+                pageNoLink2.textContent = pageNoValue - 1
+                pageNoLink1.textContent = pageNoValue - 2
+            }
+            else if(pageNoValue % 3 == 2)
+            {
+                pageNoLink2.textContent = pageNoValue
+                pageNoLink3.textContent = pageNoValue + 1
+                pageNoLink1.textContent = pageNoValue - 1
+            }
+            else if(pageNoValue % 3 == 1)
+            {
+                pageNoLink1.textContent = pageNoValue
+                pageNoLink2.textContent = pageNoValue + 1
+                pageNoLink3.textContent = pageNoValue + 2
+            }
+            
+        }
+
+        pageNoLink1.href=`/?q=${query}&pageNo=${pageNoLink1.textContent}` 
+        pageNoLink2.href=`/?q=${query}&pageNo=${pageNoLink2.textContent}` 
+        pageNoLink3.href=`/?q=${query}&pageNo=${pageNoLink3.textContent}` 
+
+        if (parseInt(pageNo) == 1)
+        {
+            prev.classList.add('disabled') 
+        }
+    </script>
+
+</body>
+
+</html>
